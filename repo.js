@@ -192,7 +192,7 @@
                             el.addClass('active');
                         } else {
                             $.ajax({
-                                url: 'https://api.github.com/repos/' + _this.settings.user + '/' + _this.settings.name + '/contents/' + link.data('path'),
+                                url: 'https://api.github.com/repos/' + _this.settings.user + '/' + _this.settings.name + '/contents/' + link.data('path') + '?ref=' + _this.settings.branch,
                                 type: 'GET',
                                 data: {},
                                 dataType: 'jsonp',
