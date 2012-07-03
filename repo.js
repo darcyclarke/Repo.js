@@ -219,9 +219,8 @@
                                     }
                                     else {
                                         el = $('<div class="file page" id="' + link.data('id') + '"><pre><code></code></pre></div>').appendTo(repo);
-                                        var ext = el.text().split('.').pop();
-                                        if(typeof _this.extensions[ext] != 'undefined')
-                                            file.find('code').addClass(_this.extensions[ext]);
+                                        if(typeof _this.extensions[extension] != 'undefined')
+                                            file.find('code').addClass(_this.extensions[extension]);
                                         el.find('code').html(String(decode64(response.data.content)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'));
                                         el.find('pre').vanGogh();
                                     }
