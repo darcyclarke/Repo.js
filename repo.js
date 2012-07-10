@@ -256,12 +256,12 @@
 
                     // Is nav link
                     } else {
+                        el = el.length ? el : _this.container.find('.page').eq(link.index());
 
                         if(link[0] !== _this.container.find('h1 a')[0])
                             link.addClass('active');
                         _this.container.find('h1 a').slice((link.index()+1),_this.container.find('h1 a').length).remove();
                         transition(el, 'right');
-
                     }
                 });
             },
