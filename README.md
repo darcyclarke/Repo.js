@@ -9,6 +9,8 @@ Repo.js uses [Markus Ekwall](https://twitter.com/#!/mekwall)'s [jQuery Vangogh](
 
 Check out the demo: http://darcyclarke.me/dev/repojs/
 
+<img src="http://darcyclarke.me/dev/repojs/repo_screen.png">
+
 ##Example Use
 
 ```javascript
