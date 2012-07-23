@@ -223,7 +223,7 @@
                                     else {
                                         el = fileContainer.append($('<pre><code></code></pre>')).appendTo(repo);
                                         if(typeof _this.extensions[extension] != 'undefined')
-                                            file.find('code').addClass(_this.extensions[extension]);
+                                            el.find('code').addClass(_this.extensions[extension]);
                                         el.find('code').html(String(decode64(response.data.content)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'));
                                         el.find('pre').vanGogh();
                                     }
@@ -258,12 +258,12 @@
 
                     // Is nav link
                     } else {
+                        el = el.length ? el : _this.container.find('.page').eq(link.index());
 
                         if(link[0] !== _this.container.find('h1 a')[0])
                             link.addClass('active');
                         _this.container.find('h1 a').slice((link.index()+1),_this.container.find('h1 a').length).remove();
                         transition(el, 'right');
-
                     }
                 });
             },
