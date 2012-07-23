@@ -106,10 +106,12 @@
             dataType: 'jsonp',
             success: function(response){
 
+
+                var treeLength = response.data.tree.length;
                 $.each(response.data.tree, function(i){
 
                     // Setup if last element
-                    if(!--response.data.tree.length){
+                    if(!--treeLength){
                         _this.container.addClass('loaded');
                         transition(_this.container.find('.page').first(), 'left', true);
                     }
