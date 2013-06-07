@@ -26,7 +26,7 @@ $('body').repo({ user: 'jquery', name: 'jquery', branch: 'strip_iife' });
 @author [Darcy Clarke](http://darcyclarke.me)
 @version 1.0
 
- ##License
+##License
 
 Copyright (c) 2012 Darcy Clarke <darcy@darcyclarke.me>
 

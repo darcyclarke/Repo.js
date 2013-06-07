@@ -52,7 +52,7 @@
             calculateHeight = function(el){
                 // This calculates the height of the bounding box for the repo display.
                 // clientHeight is element containing fetched results, plus the h1 tag, plus
-                // the div repo margin has of 15 pixels.  
+                // the div repo margin has of 15 pixels.
                 return (el[0].clientHeight + _this.container.find('h1').outerHeight(true) + 15);
             },
 
@@ -96,8 +96,14 @@
             files       : []
         };
 
-        // Namespace
-        _this.namespace = _this.settings.name.toLowerCase();
+        // Namespace - strip out characters that would have to be escaped to be used in selectors
+        _this.namespace = _this.settings.name.toLowerCase().replace(/[^a-z0-9]-_/g, '');
+
+        // Check if this namespace is already in use
+        var usedNamespaces = $('[data-id^='+ _this.namespace +']');
+        if(usedNamespaces.length){
+            _this.namespace += String(usedNamespaces.length);
+        }
 
         // Insert CSS
         if(typeof _this.settings.css != 'undefined' && _this.settings.css !== '' && $('#repojs_css').length <= 0)
@@ -287,3 +293,4 @@
     };
 
 })(jQuery);
+
