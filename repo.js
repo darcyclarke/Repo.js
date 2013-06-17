@@ -97,7 +97,7 @@
         };
 
         // Namespace - strip out characters that would have to be escaped to be used in selectors
-        _this.namespace = _this.settings.name.toLowerCase().replace(/[^a-z0-9]-_/g, '');
+        _this.namespace = _this.settings.name.toLowerCase().replace(/[^a-z0-9_-]/g, '');
 
         // Check if this namespace is already in use
         var usedNamespaces = $('[data-id^='+ _this.namespace +']');
