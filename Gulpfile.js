@@ -24,15 +24,21 @@ gulp.task('css', function() {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('min', ['css'], function() {
+gulp.task('dist:dev', ['css'], function() {
+  return gulp.src([paths.deps, paths.repo_tmp])
+    .pipe(concat('repo.js'))
+    .pipe(gulp.dest('./'))
+});
+
+gulp.task('dist:min', ['css'], function() {
   return gulp.src([paths.deps, paths.repo_tmp])
     .pipe(uglify({ preserveComments: 'some' }))
     .pipe(concat('repo.min.js'))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('clean', ['min'], function() {
+gulp.task('clean', ['dist:min'], function() {
   rimraf(paths.repo_tmp);
 });
 
-gulp.task('default', ['css', 'min', 'clean']);
+gulp.task('default', ['css', 'dist:dev', 'dist:min', 'clean']);
