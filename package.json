@@ -1,0 +1,14 @@
+{
+  "name": "Repo",
+  "description": "Repo.js is a jQuery plugin that lets you easily embed a Github repo onto your site. This is great for other plugin or library authors that want to showcase the contents of a repo on their project pages.",
+  "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/darcyclarke/Repo.js"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-concat": "^2.3.4",
+    "gulp-uglify": "^0.3.1"
+  }
+}
