@@ -10,12 +10,15 @@ var paths = {
   repo: 'src/repo.js',
   repo_tmp: '.tmp/repo.js',
   deps: 'src/dependencies/**/*.js',
-  css: 'src/styles/repo.css'
+  css: [
+    'src/styles/prism.css',
+    'src/styles/repo.css'
+  ]
 };
 
 gulp.task('css', function() {
   var templateData = {
-    css: uglifycss.processFiles([paths.css])
+    css: uglifycss.processFiles(paths.css)
   }
 
   return gulp.src(paths.repo)
