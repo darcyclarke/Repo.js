@@ -44,4 +44,8 @@ gulp.task('clean', ['dist:min'], function() {
   rimraf(paths.repo_tmp);
 });
 
-gulp.task('default', ['css', 'dist:dev', 'dist:min', 'clean']);
+gulp.task('watch', function() {
+  gulp.watch(paths.css.concat(paths.repo), ['css', 'dist:dev', 'dist:min', 'clean']);
+})
+
+gulp.task('default', ['css', 'dist:dev', 'dist:min', 'clean', 'watch']);

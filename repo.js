@@ -852,7 +852,6 @@ Prism.hooks.add('after-highlight', function (env) {
                       el.find('code').addClass('language-' + _this.extensions[extension]);
                     el.find('code').html(String(decode64(response.data.content)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'));
                     Prism.highlightAll();
-                    // el.find('pre').vanGogh();
                   }
 
                   transition(el, 'left');
