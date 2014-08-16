@@ -691,9 +691,9 @@ Prism.hooks.add('after-highlight', function (env) {
     // Extension Hashes
     _this.extensions = {
       as      : 'actionscript',
-      coffee    : 'coffeescript',
+      coffee  : 'coffeescript',
       css     : 'css',
-      html    : 'html',
+      html    : 'markup',
       js      : 'javascript',
       md      : 'markdown',
       php     : 'php',
