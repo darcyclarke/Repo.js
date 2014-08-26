@@ -1,4 +1,10 @@
-/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+coffeescript+scss+ruby&plugins=line-numbers */
+/*!
+ * Prism: Lightweight, robust, elegant syntax highlighting
+ * MIT license http://www.opensource.org/licenses/mit-license.php/
+ * @author Lea Verou http://lea.verou.me
+ */
+
+/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+php+coffeescript+scss+c+python+ruby+objectivec&plugins=line-numbers */
 self = (typeof window !== 'undefined')
 	? window   // if in browser
 	: (
@@ -6,12 +12,6 @@ self = (typeof window !== 'undefined')
 		? self // if in worker
 		: {}   // if in node js
 	);
-
-/**
- * Prism: Lightweight, robust, elegant syntax highlighting
- * MIT license http://www.opensource.org/licenses/mit-license.php/
- * @author Lea Verou http://lea.verou.me
- */
 
 var Prism = (function(){
 
@@ -356,7 +356,7 @@ if (!self.document) {
 		    lang = message.language,
 		    code = message.code;
 
-		self.postMessage(JSON.stringify(_.tokenize(code, _.languages[lang])));
+		self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
 		self.close();
 	}, false);
 
@@ -517,6 +517,106 @@ if (Prism.languages.markup) {
 	});
 }
 ;
+/**
+ * Original by Aaron Harun: http://aahacreative.com/2012/07/31/php-syntax-highlighting-prism/
+ * Modified by Miles Johnson: http://milesj.me
+ *
+ * Supports the following:
+ * 		- Extends clike syntax
+ * 		- Support for PHP 5.3+ (namespaces, traits, generators, etc)
+ * 		- Smarter constant and function matching
+ *
+ * Adds the following new token classes:
+ * 		constant, delimiter, variable, function, package
+ */
+
+Prism.languages.php = Prism.languages.extend('clike', {
+	'keyword': /\b(and|or|xor|array|as|break|case|cfunction|class|const|continue|declare|default|die|do|else|elseif|enddeclare|endfor|endforeach|endif|endswitch|endwhile|extends|for|foreach|function|include|include_once|global|if|new|return|static|switch|use|require|require_once|var|while|abstract|interface|public|implements|private|protected|parent|throw|null|echo|print|trait|namespace|final|yield|goto|instanceof|finally|try|catch)\b/ig,
+	'constant': /\b[A-Z0-9_]{2,}\b/g,
+	'comment': {
+		pattern: /(^|[^\\])(\/\*[\w\W]*?\*\/|(^|[^:])(\/\/|#).*?(\r?\n|$))/g,
+		lookbehind: true
+	}
+});
+
+Prism.languages.insertBefore('php', 'keyword', {
+	'delimiter': /(\?>|<\?php|<\?)/ig,
+	'variable': /(\$\w+)\b/ig,
+	'package': {
+		pattern: /(\\|namespace\s+|use\s+)[\w\\]+/g,
+		lookbehind: true,
+		inside: {
+			punctuation: /\\/
+		}
+	}
+});
+
+// Must be defined after the function pattern
+Prism.languages.insertBefore('php', 'operator', {
+	'property': {
+		pattern: /(->)[\w]+/g,
+		lookbehind: true
+	}
+});
+
+// Add HTML support of the markup language exists
+if (Prism.languages.markup) {
+
+	// Tokenize all inline PHP blocks that are wrapped in <?php ?>
+	// This allows for easy PHP + markup highlighting
+	Prism.hooks.add('before-highlight', function(env) {
+		if (env.language !== 'php') {
+			return;
+		}
+
+		env.tokenStack = [];
+
+		env.backupCode = env.code;
+		env.code = env.code.replace(/(?:<\?php|<\?)[\w\W]*?(?:\?>)/ig, function(match) {
+			env.tokenStack.push(match);
+
+			return '{{{PHP' + env.tokenStack.length + '}}}';
+		});
+	});
+
+	// Restore env.code for other plugins (e.g. line-numbers)
+	Prism.hooks.add('before-insert', function(env) {
+		if (env.language === 'php') {
+			env.code = env.backupCode;
+			delete env.backupCode;
+		}
+	});
+
+	// Re-insert the tokens after highlighting
+	Prism.hooks.add('after-highlight', function(env) {
+		if (env.language !== 'php') {
+			return;
+		}
+
+		for (var i = 0, t; t = env.tokenStack[i]; i++) {
+			env.highlightedCode = env.highlightedCode.replace('{{{PHP' + (i + 1) + '}}}', Prism.highlight(t, env.grammar, 'php'));
+		}
+
+		env.element.innerHTML = env.highlightedCode;
+	});
+
+	// Wrap tokens in classes that are missing them
+	Prism.hooks.add('wrap', function(env) {
+		if (env.language === 'php' && env.type === 'markup') {
+			env.content = env.content.replace(/(\{\{\{PHP[0-9]+\}\}\})/g, "<span class=\"token php\">$1</span>");
+		}
+	});
+
+	// Add the rules before all others
+	Prism.languages.insertBefore('php', 'comment', {
+		'markup': {
+			pattern: /<[^?]\/?(.*?)>/g,
+			inside: Prism.languages.markup
+		},
+		'php': /\{\{\{PHP[0-9]+\}\}\}/g
+	});
+}
+;
 Prism.languages.coffeescript = Prism.languages.extend('javascript', {
 	'comment': [
 		/([#]{3}\s*\r?\n(.*\s*\r*\n*)\s*?\r?\n[#]{3})/g,
@@ -573,6 +673,47 @@ Prism.languages.insertBefore('scss', 'ignore', {
 	'operator': /\s+([-+]{1,2}|={1,2}|!=|\|?\||\?|\*|\/|\%)\s+/g
 });
 ;
+Prism.languages.c = Prism.languages.extend('clike', {
+	// allow for c multiline strings
+	'string': /("|')([^\n\\\1]|\\.|\\\r*\n)*?\1/g,
+	'keyword': /\b(asm|typeof|inline|auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while)\b/g,
+	'operator': /[-+]{1,2}|!=?|<{1,2}=?|>{1,2}=?|\->|={1,2}|\^|~|%|&{1,2}|\|?\||\?|\*|\//g
+});
+
+Prism.languages.insertBefore('c', 'string', {
+	// property class reused for macro statements
+	'property': {
+		// allow for multiline macro definitions
+		// spaces after the # character compile fine with gcc
+		pattern: /((^|\n)\s*)#\s*[a-z]+([^\n\\]|\\.|\\\r*\n)*/gi,
+		lookbehind: true,
+		inside: {
+			// highlight the path of the include statement as a string
+			'string': {
+				pattern: /(#\s*include\s*)(<.+?>|("|')(\\?.)+?\3)/g,
+				lookbehind: true,
+			}
+		}
+	}
+});
+
+delete Prism.languages.c['class-name'];
+delete Prism.languages.c['boolean'];;
+Prism.languages.python= { 
+	'comment': {
+		pattern: /(^|[^\\])#.*?(\r?\n|$)/g,
+		lookbehind: true
+	},
+	'string': /"""[\s\S]+?"""|("|')(\\?.)*?\1/g,
+	'keyword' : /\b(as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|pass|print|raise|return|try|while|with|yield)\b/g,
+	'boolean' : /\b(True|False)\b/g,
+	'number' : /\b-?(0x)?\d*\.?[\da-f]+\b/g,
+	'operator' : /[-+]{1,2}|=?&lt;|=?&gt;|!|={1,2}|(&){1,2}|(&amp;){1,2}|\|?\||\?|\*|\/|~|\^|%|\b(or|and|not)\b/g,
+	'ignore' : /&(lt|gt|amp);/gi,
+	'punctuation' : /[{}[\];(),.:]/g
+};
+
+;
 /**
  * Original by Samuel Flores
  *
@@ -593,6 +734,12 @@ Prism.languages.insertBefore('ruby', 'keyword', {
 	},
 	'variable': /[@$]+\b[a-zA-Z_][a-zA-Z_0-9]*[?!]?\b/g,
 	'symbol': /:\b[a-zA-Z_][a-zA-Z_0-9]*[?!]?\b/g
+});
+;
+Prism.languages.objectivec = Prism.languages.extend('c', {
+	'keyword': /(\b(asm|typeof|inline|auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while|in|self|super)\b)|((?=[\w|@])(@interface|@end|@implementation|@protocol|@class|@public|@protected|@private|@property|@try|@catch|@finally|@throw|@synthesize|@dynamic|@selector)\b)/g,
+	'string': /(?:("|')([^\n\\\1]|\\.|\\\r*\n)*?\1)|(@"([^\n\\"]|\\.|\\\r*\n)*?")/g,
+	'operator': /[-+]{1,2}|!=?|<{1,2}=?|>{1,2}=?|\->|={1,2}|\^|~|%|&{1,2}|\|?\||\?|\*|\/|@/g
 });
 ;
 Prism.hooks.add('after-highlight', function (env) {
@@ -690,7 +837,6 @@ Prism.hooks.add('after-highlight', function (env) {
 
     // Extension Hashes
     _this.extensions = {
-      as      : 'actionscript',
       coffee  : 'coffeescript',
       css     : 'css',
       html    : 'markup',

@@ -68,7 +68,6 @@
 
     // Extension Hashes
     _this.extensions = {
-      as      : 'actionscript',
       coffee  : 'coffeescript',
       css     : 'css',
       html    : 'markup',
