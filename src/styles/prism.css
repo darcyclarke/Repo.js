@@ -15,6 +15,8 @@ pre[class*="language-"] {
   word-spacing: normal;
   word-break: normal;
   line-height: 1.5;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
 
   -moz-tab-size: 4;
   -o-tab-size: 4;
