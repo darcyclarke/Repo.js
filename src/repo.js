@@ -109,6 +109,11 @@
       dataType: 'jsonp',
       success: function(response){
 
+        if(response.meta.status != 200) {
+          _this.container.addClass('loaded').html('<div class="page active"><ul><li class="title">API Limit exceeded</li></ul></div>');
+          return;
+        }
+
         var treeLength = response.data.tree.length;
         $.each(response.data.tree, function(i){
 
@@ -286,4 +291,3 @@
   };
 
 })(jQuery);
-

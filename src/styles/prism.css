@@ -56,7 +56,7 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background: #f5f2f0;
+  background: #fff;
 }
 
 /* Inline code */
@@ -69,7 +69,8 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: slategray;
+  color: #999988;
+  font-style: italic;
 }
 
 .token.punctuation {
@@ -132,7 +133,7 @@ pre[class*="language-"] {
 
 pre.line-numbers {
   position: relative;
-  padding-left: 3.8em;
+  padding-left: 4.8em;
   counter-reset: linenumber;
 }
 
@@ -143,12 +144,13 @@ pre.line-numbers > code {
 .line-numbers .line-numbers-rows {
   position: absolute;
   pointer-events: none;
-  top: 0;
   font-size: 100%;
-  left: -3.8em;
-  width: 3em; /* works for line-numbers below 1000 lines */
+  left: -4.8em;
+  width: 4em; /* works for line-numbers below 1000 lines */
   letter-spacing: -1px;
-  border-right: 1px solid #999;
+  border-right: 1px solid #eee;
+  padding-top: 1em;
+  top: -1em;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -165,7 +167,7 @@ pre.line-numbers > code {
 
 .line-numbers-rows > span:before {
   content: counter(linenumber);
-  color: #999;
+  color: #b7b7b7;
   display: block;
   padding-right: 0.8em;
   text-align: right;
