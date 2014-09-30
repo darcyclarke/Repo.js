@@ -72,6 +72,7 @@
     _this.extensions = {
       coffee  : 'coffeescript',
       css     : 'css',
+      scss    : 'css',
       html    : 'markup',
       js      : 'javascript',
       json    : 'javascript',
@@ -110,7 +111,7 @@
       success: function(response){
 
         if(response.meta.status != 200) {
-          _this.container.addClass('loaded').html('<div class="page active"><ul><li class="title">API Limit exceeded</li></ul></div>');
+          _this.container.addClass('loaded').html('<div class="page active"><ul><li class="titles">API limit exceeded</li></ul></div>');
           return;
         }
 
