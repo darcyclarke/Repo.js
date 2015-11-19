@@ -1,0 +1,18 @@
+
+div.repo(id=type + "-" + hash)
+
+  h1: a(href="#repo-" + id)!= name
+
+  div.repo-loader
+
+  div.repo-page(data-id=namespace)
+
+    ul.repo-list-items
+
+      li.repo-list-item.repo-labels
+
+        span.repo-label-filename Filename
+
+        span.repo-label-commit Commit
+
+        span.repo-label-date Date
