@@ -1,0 +1,22 @@
+
+<div class="repo-header">
+
+  {{#if name}}
+  <h1 class="repo-name">
+    <a href="#repo-{{id}}">{{name}}</a>
+  </h1>
+  {{/if}}
+
+  {{#if description}}
+  <p class="repo-description">
+    {{description}}
+  </p>
+  {{/if}}
+
+  {{#if buttons}}
+  <div class="repo-buttons">
+    {{buttons}}
+  </div>
+  {{/if}}
+
+</div>

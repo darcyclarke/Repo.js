@@ -7,17 +7,12 @@
     "url": "http://github.com/darcyclarke/Repo.js"
   },
   "devDependencies": {
-    "babel-plugin-inline-package-json": "1.0.1",
-    "babel-preset-es2015": "6.9.0",
-    "gulp": "3.9.0",
-    "gulp-babel": "6.1.2",
-    "gulp-load-plugins": "1.1.0",
-    "jade": "1.11.0",
-    "localforage": "1.4.2",
-    "mkpath": "1.0.0",
-    "prismjs": "1.4.1",
-    "rimraf": "2.5.2",
-    "standard": "6.0.8",
-    "whatwg-fetch": "0.11.0"
+    "gulp": "^3.9.0",
+    "gulp-load-plugins": "^1.1.0",
+    "jade": "^1.11.0",
+    "mkpath": "^1.0.0",
+    "prismjs": "^1.4.1",
+    "standard": "^6.0.8",
+    "whatwg-fetch": "^0.11.0"
   }
 }

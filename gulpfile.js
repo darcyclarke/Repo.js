@@ -3,29 +3,34 @@
 // Requirements
 // ----------------------------
 
-var gulp    = require('gulp');
-var plugins = require('gulp-load-plugins');
-
-var license = """
-/*!
- * Repo.js
- * @author Darcy Clarke
- * Copyright (c) 2015 Darcy Clarke
- * Dual licensed under the MIT and GPL licenses.
- * http://darcyclarke.me/
- */
-"""
+var gulp = require('gulp')
+var plugins = require('gulp-load-plugins')
 
 // ----------------------------
 // Paths
 // ----------------------------
 
 var paths = {
-  main: './src/repo.js',
-  vendor: './src/vendor/**/*.js',
-  styles: './src/styles/**/*.styl'
-  dist: './dist/'
-};
+  source: {
+    libs: [],
+    templates: './src/templates/**/*.hbs',
+    scripts: './src/scripts/index.js',
+    styles: './src/styles/index.js'
+  },
+  build: {
+    themes: './dist/themes/',
+    styles: './dist/repo.css',
+    scripts: './dist/repo.js'
+  }
+}
+
+// ----------------------------
+// Clean Task
+// ----------------------------
+
+gulp.task( 'clean', function () {
+
+})
 
 // ----------------------------
 // Build Task
@@ -33,4 +38,4 @@ var paths = {
 
 gulp.task( 'build', function () {
 
-});
+})
