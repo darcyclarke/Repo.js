@@ -26,8 +26,6 @@ You can also reference a specific branch if you want:
 $('body').repo({ user: 'jquery', name: 'jquery', branch: 'strip_iife' });
 ````
 
-@author [Darcy Clarke](http://darcyclarke.me)
-
 ##License
 
 Copyright (c) 2016 Darcy Clarke <darcy@darcyclarke.me>
