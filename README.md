@@ -14,29 +14,29 @@
 Repo.js
 =======
 
-Repo.js is a JavaScript library that lets you easily embed a Github repo onto your site. This is great for showcasing the contents of a repo on project pages, documentation etc..
+> Repo.js is a JavaScript library that lets you easily embed a Github repo onto your site. This is great for showcasing the contents of a repo on project pages, documentation etc..
 
-##Example Usage
+## Usage
 
 ```html
 <a href="https://github.com/darcyclarke/repo.js" class="repojs"></a>
-````
+```
 
 ```html
 <script defer src="https://oss.maxcdn.com/repojs/2.0.1/repo.js"></script>
-````
+```
 
 ### Gists are automatically detected
 
 ```html
 <a href="https://gist.github.com/darcyclarke/355aa8045c2cf9816a3b" class="repojs"></a>
-````
+```
 
 ### Options can be set with `data` attributes or via JavaScript
 
 ```html
 <a href="https://github.com/darcyclarke/detect.js" class="repojs" data-type="user"></a>
-````
+```
 
 ```javascript
 var element = document.querySelector( 'div' );
@@ -49,7 +49,7 @@ var buttons = new Repo( element, {
     watch: false
   }
 });
-````
+```
 
 ## JavaScript API
 

@@ -1,23 +1,40 @@
 {
   "name": "repojs",
-  "description": "Repo.js is a library that lets you easily embed a Github repo onto your site. This is great for other plugin or library authors that want to showcase the contents of a repo on their project pages, in documentation etc..",
+  "description": "repo.js is a library that lets you easily embed a Github repo onto your site. This is great for other plugin or library authors that want to showcase the contents of a repo on their project pages, in documentation etc..",
   "version": "2.0.0",
+  "author": "Darcy Clarke <darcy@darcyclarke.me> (http://darcyclarke.me)",
+  "main": "./dist/repo.js",
+  "bugs": {
+    "url": "https://github.com/darcyclarke/repo.js/issues"
+  },
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com/darcyclarke/Repo.js"
+    "url": "http://github.com/darcyclarke/repo.js"
+  },
+  "scripts": {
+    "test": "npm run mocha"
   },
   "devDependencies": {
     "babel-plugin-inline-package-json": "1.0.1",
     "babel-preset-es2015": "6.9.0",
+    "chai": "3.5.0",
+    "colors": "1.1.2",
     "gulp": "3.9.0",
     "gulp-babel": "6.1.2",
+    "gulp-header": "1.8.8",
+    "gulp-if": "2.0.1",
     "gulp-load-plugins": "1.1.0",
+    "intern": "3.3.1",
     "jade": "1.11.0",
     "localforage": "1.4.2",
     "mkpath": "1.0.0",
+    "mocha": "3.0.2",
+    "node-redis": "0.1.7",
     "prismjs": "1.4.1",
     "rimraf": "2.5.2",
     "standard": "6.0.8",
-    "whatwg-fetch": "0.11.0"
+    "whatwg-fetch": "0.11.0",
+    "yargs": "5.0.0"
   }
 }
